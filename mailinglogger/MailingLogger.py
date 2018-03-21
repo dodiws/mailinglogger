@@ -97,6 +97,13 @@ class MailingLogger(SMTPHandler):
             email['Date'] = formatdate()
             email['Message-ID'] = make_msgid('MailingLogger')
             smtp = smtplib.SMTP(self.mailhost, self.mailport)
+            secureports = [587]
+            try:
+                port = int(self.mailhost.split(':')[1])
+            except:
+                port = None
+            if (self.mailport in secureports) or (port in secureports):
+                smtp.starttls()
             if self.username and self.password:
                 smtp.login(self.username, self.password)
             smtp.sendmail(self.fromaddr, self.toaddrs, email.as_string())
