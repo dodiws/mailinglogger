@@ -76,7 +76,7 @@ class MailingLogger(SMTPHandler):
             return
         self.sent += 1
 
-        # actually send the mail
+        # actually send the mail,
         try:
             msg = self.format(record)
             if self.template is not None:
