@@ -60,7 +60,7 @@ class MailingLogger(SMTPHandler):
             self.hour = current_hour
             self.sent = 0
         if self.sent == self.flood_level:
-            # send critical error
+            # send critical error,
             record = LogRecord(
                 name='flood',
                 level=CRITICAL,
@@ -76,7 +76,7 @@ class MailingLogger(SMTPHandler):
             return
         self.sent += 1
 
-        # actually send the mail
+        # actually send the mail,
         try:
             msg = self.format(record)
             if self.template is not None:
